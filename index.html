@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="game-header">
+      <div class="user-info" id="user-info">
+        <span id="username-display"></span>
+        <button id="logout-btn" class="btn">Logout</button>
+      </div>
+      <div class="guest-info" id="guest-info">
+        <button id="login-btn" class="btn">Login / Sign Up</button>
+      </div>
+    </header>
+
+    <main class="game-container">
+      <div class="game-board" id="game-board">
+        <div class="score-board">
+          <div id="score">Score: 0</div>
+          <div id="time-left">Time: 60</div>
+        </div>
+        <canvas id="game-canvas"></canvas>
+        <div class="mobile-controls">
+          <div class="control-row">
+            <button class="control-btn" data-direction="up">▲</button>
+          </div>
+          <div class="control-row">
+            <button class="control-btn" data-direction="left">◀</button>
+            <button class="control-btn" data-direction="right">▶</button>
+          </div>
+          <div class="control-row">
+            <button class="control-btn" data-direction="down">▼</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div class="sidebar-section">
+          <h2>High Scores</h2>
+          <ol id="leaderboard-list"></ol>
+        </div>
+        <div class="sidebar-section">
+          <h2>Comments</h2>
+          <div id="comments-list"></div>
+          <div class="comment-form">
+            <input
+              type="text"
+              id="comment-input"
+              placeholder="Add a comment..."
+            />
+            <button id="submit-comment-btn" class="btn">Submit</button>
+          </div>
+        </div>
+        <div class="sidebar-section options-section">
+          <div class="option">
+            <span>Sound</span>
+            <label class="switch">
+              <input type="checkbox" id="sound-toggle" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="option">
+            <span>Dark Mode</span>
+            <label class="switch">
+              <input type="checkbox" id="dark-mode-toggle" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="modal" id="menu-modal">
+      <div class="modal-content">
+        <h2>Select Game Mode</h2>
+        <div class="mode-select-buttons">
+          <button class="btn mode-select" data-mode="classic">Classic</button>
+          <button class="btn mode-select" data-mode="time-attack">
+            Time Attack
+          </button>
+          <button class="btn mode-select" data-mode="survival">Survival</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="auth-modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div id="login-section">
+          <h2>Login</h2>
+          <form id="login-form">
+            <input type="text" id="login-username" placeholder="Username" required />
+            <input type="password" id="login-password" placeholder="Password" required />
+            <button type="submit" class="btn">Login</button>
+          </form>
+          <p>
+            Don't have an account? <a href="#" id="show-signup">Sign Up</a>
+          </p>
+          <p>
+            Or play as <a href="#" id="play-as-guest">Guest</a>
+          </p>
+        </div>
+        <div id="signup-section" style="display: none">
+          <h2>Sign Up</h2>
+          <form id="signup-form">
+            <input type="text" id="signup-username" placeholder="Username" required />
+            <input type="password" id="signup-password" placeholder="Password" required />
+            <button type="submit" class="btn">Sign Up</button>
+          </form>
+          <p>
+            Already have an account? <a href="#" id="show-login">Log In</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="game-over-modal">
+      <div class="modal-content">
+        <h2>Game Over!</h2>
+        <p>Final Score: <span id="final-score">0</span></p>
+        <button id="play-again-btn" class="btn">Play Again</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

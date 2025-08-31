@@ -1,0 +1,346 @@
+/* --- Global Styles & Variables --- */
+:root {
+  --primary-color: #4caf50;
+  --secondary-color: #388e3c;
+  --text-color: #333;
+  --background-color: #e8f5e9;
+  --modal-bg: #fff;
+  --modal-border: #ccc;
+  --snake-head-color: #2e7d32;
+  --snake-body-color: #4caf50;
+  --food-color: #e53935;
+  --grid-color: #c8e6c9;
+  --btn-bg: #4caf50;
+  --btn-hover-bg: #388e3c;
+  --input-bg: #f9f9f9;
+}
+
+body.dark-mode {
+  --text-color: #e0e0e0;
+  --background-color: #212121;
+  --modal-bg: #333;
+  --modal-border: #555;
+  --snake-head-color: #81c784;
+  --snake-body-color: #66bb6a;
+  --food-color: #ef5350;
+  --grid-color: #424242;
+  --btn-bg: #66bb6a;
+  --btn-hover-bg: #81c784;
+  --input-bg: #424242;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Layout --- */
+.game-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 500px;
+  width: 100%;
+}
+
+#game-canvas {
+  border: 2px solid var(--snake-head-color);
+  background-color: transparent;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+}
+
+.score-board {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 500px;
+  width: 100%;
+}
+
+.sidebar-section {
+  background-color: var(--modal-bg);
+  border: 1px solid var(--modal-border);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-section h2 {
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* --- Buttons & Inputs --- */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--btn-bg);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--btn-hover-bg);
+}
+
+.comment-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+#comment-input {
+  flex-grow: 1;
+  padding: 0.5rem;
+  border: 1px solid var(--modal-border);
+  border-radius: 5px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+/* --- Lists --- */
+#leaderboard-list,
+#comments-list {
+  list-style: none;
+  padding: 0;
+}
+
+#leaderboard-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--modal-border);
+}
+
+#leaderboard-list li:last-child {
+  border-bottom: none;
+}
+
+.comment {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--modal-border);
+}
+
+.comment .username {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+/* --- Modals --- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: var(--modal-bg);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 2rem;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.modal h2 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.mode-select-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* --- Auth Forms --- */
+#login-form,
+#signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+#login-form input,
+#signup-form input {
+  padding: 0.75rem;
+  border: 1px solid var(--modal-border);
+  border-radius: 5px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+#login-form a,
+#signup-form a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* --- Toggles (Switches) --- */
+.option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* --- Mobile Controls --- */
+.mobile-controls {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.control-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.control-btn {
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+  .game-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .game-board {
+    margin-right: 2rem;
+  }
+  .sidebar {
+    max-width: 350px;
+  }
+  .mobile-controls {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .mobile-controls {
+    display: flex;
+  }
+  .game-header {
+    justify-content: center;
+  }
+}
